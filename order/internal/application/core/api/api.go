@@ -1,8 +1,8 @@
 package api
 
 import (
-	"github.com/spncrlkt/go-micro-bk/go-micro-bk/order/internal/application/core/domain"
-	"github.com/spncrlkt/go-micro-bk/go-micro-bk/order/internal/ports"
+	"github.com/spncrlkt/go-micro-bk/order/internal/application/core/domain"
+	"github.com/spncrlkt/go-micro-bk/order/internal/ports"
 )
 
 type Application struct {
