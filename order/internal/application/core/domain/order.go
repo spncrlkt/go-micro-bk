@@ -15,7 +15,7 @@ type Order struct {
 	CustomerID int64       `json:"customer_id"`
 	Status     string      `json:"status"`
 	OrderItems []OrderItem `json:"order_items"`
-	CreatedAt  `json:"created_at"`
+	CreatedAt  int64       `json:"created_at"`
 }
 
 func NewOrder(customerId int64, orderItems []OrderItem) Order {

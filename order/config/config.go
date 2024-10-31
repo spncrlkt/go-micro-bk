@@ -19,7 +19,7 @@ func GetApplicationPort() int {
 	port, err := strconv.Atoi(portStr)
 
 	if err != nil {
-		log.Fatalf("port: %s is invalid", porStr)
+		log.Fatalf("port: %s is invalid", portStr)
 	}
 
 	return port
