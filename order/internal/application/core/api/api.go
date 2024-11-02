@@ -20,5 +20,9 @@ func (a Application) PlaceOrder(order domain.Order) (domain.Order, error) {
 	if err != nil {
 		return domain.Order{}, err
 	}
+    paymentErr := a.payment.Charge(&order)
+    if paymentError != nil {
+        return domain.Order{}, paymentErr
+    }
 	return order, nil
 }
