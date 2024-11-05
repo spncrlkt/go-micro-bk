@@ -21,8 +21,17 @@ func (a Application) PlaceOrder(order domain.Order) (domain.Order, error) {
 		return domain.Order{}, err
 	}
     paymentErr := a.payment.Charge(&order)
-    if paymentError != nil {
-        return domain.Order{}, paymentErr
+    if paymentErr != nil {
+        st, _ := status.FromError(paymentErr)
+        fieldErr := &errdetails.BadRequest_FieldViolation{
+            Field: "payment"
+            Description: st.Message(),
+        }
+        badReq := &errdetails.BadRequest{}
+        badReq.FieldViolations = append(badReq.FieldViolations, fieldErr)
+        orderStatus := status.New(codes.InvalidArgument, "order creation failed")
+        statusWithDetails, _ := orderStatus.WithDetails(badReq)
+        return domain.Order{}, statusWithDetails.Err()
     }
 	return order, nil
 }
